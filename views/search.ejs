@@ -1,0 +1,315 @@
+<% layout("/layouts/boilerplate.ejs") -%>
+    <div class="search-container mt-5">
+        <!-- Check if customer exists -->
+        <% if (customer) { %>
+            <div class="text-center mb-4">
+                <h1 class="search-title">Customer Details</h1>
+                <p class="search-description">Here are the details of the customer with tracking ID: <%=
+                        customer.trackingId %>
+                </p>
+            </div>
+
+            <!-- Customer Details Section -->
+            <div class="details-container">
+                <!-- Customer Image and Name -->
+                <div class="customer-header">
+                    <img src="/images/mainlogo.png" class="customer-img" alt="Customer Image">
+                    <h3 class="customer-name">
+                        <%= customer.customername %>
+                    </h3>
+                </div>
+
+                <!-- Customer Contact Info -->
+                <div class="detail-item">
+                    <h5><i class="fas fa-phone-alt"></i>
+                        <%= customer.phno %>
+                    </h5>
+                    <h5><i class="fas fa-envelope"></i>
+                        <%= customer.email %>
+                    </h5>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="detail-item">
+                    <p><strong>Aadhar:</strong>
+                        <%= customer.aadharnumber %>
+                    </p>
+                    <p><strong>Package Weight:</strong>
+                        <%= customer.packageweight %> kg
+                    </p>
+                </div>
+
+                <!-- Dates -->
+                <div class="detail-item">
+                    <p><strong>Received Date:</strong>
+                        <%= new Date(customer.date).toLocaleDateString('en-IN', { weekday: 'long' , year: 'numeric' ,
+                            month: 'long' , day: 'numeric' }) %>
+                    </p>
+                    <p><strong>Expected Delivery Date:</strong>
+                        <%= new Date(customer.expectedDeliveryDate).toLocaleDateString('en-IN', { weekday: 'long' ,
+                            year: 'numeric' , month: 'long' , day: 'numeric' }) %>
+                    </p>
+                </div>
+
+                <!-- ICLID and Tracking ID -->
+                <div class="detail-item">
+                    <%if(isloggedin){%>
+                        <p><strong>ICLID:</strong>
+                            <%= customer.iclid %>
+                        </p>
+                        <%}%>
+                            <p><strong>Tracking ID:</strong>
+                                <%= customer.trackingId %>
+                            </p>
+                </div>
+
+                <!-- Customer Address -->
+                <div class="detail-item">
+                    <p><strong>Address:</strong>
+                        <%= customer.address %>
+                    </p>
+                </div>
+                <div class="detail-item">
+                    <p><strong>State:</strong>
+                        <%= customer.state %>
+                    </p>
+                </div>
+                <div class="detail-item">
+                    <p><strong>Country:</strong>
+                        <%= customer.country %>
+                    </p>
+                </div>
+
+                <!-- Price Information -->
+                <div class="detail-item">
+                    <p><strong>Price Per Kg:</strong> ₹<%= customer.pricePerKg %>
+                    </p>
+                    <p><strong>Total Price:</strong> ₹<%= customer.totalPrice %>
+                    </p>
+                </div>
+
+                <!-- Tracking Updates Section with Animated Progress Bar -->
+                <% if (customer.packageTrackingLocations.length> 0) { %>
+                    <div class="tracking-section">
+                        <h3>Tracking Updates</h3>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg">
+                                <!-- Progress bar logic -->
+                                <div class="progress-bar-fill"
+                                    style="width: <%= customer.deliveredStatus ? 100 : Math.min((customer.packageTrackingLocations.length / 5) * 100, 90) %>%">
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="tracking-list">
+                            <% customer.packageTrackingLocations.forEach((location, index)=> { %>
+                                <li class="tracking-item" style="animation-delay: <%= index * 0.2 %>s">
+                                    <i class="fas fa-location-arrow"></i>
+                                    <%= location %>
+                                </li>
+                                <% }); %>
+                        </ul>
+                    </div>
+                    <% } else { %>
+                        <p>No tracking updates available.</p>
+                        <% } %>
+
+
+
+                            <!-- Optional Buttons Section, only visible if logged in -->
+                            <% if (isloggedin) { %>
+
+
+                                <!-- Delivery Status Section -->
+                                <div class="delivery-status-section mt-4">
+                                    <form action="/update-delivery-status/<%= customer._id %>" method="POST">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="deliveryStatus"
+                                                name="deliveredStatus" <%=customer.deliveredStatus ? 'checked' : '' %>
+                                            />
+                                            <label class="form-check-label" for="deliveryStatus">
+                                                Mark as Delivered
+                                            </label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mt-3">Save Delivery Status</button>
+                                    </form>
+                                </div>
+                                <div class="action-buttons">
+                                    <!-- Edit Button -->
+                                    <a href="/edit-customer/<%= customer._id %>" class="btn btn-warning"><i
+                                            class="fas fa-edit"></i> Edit</a>
+
+                                    <!-- Delete Button -->
+                                    <form action="/delete-customer/<%= customer._id %>?_method=DELETE" method="POST"
+                                        class="d-inline">
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>
+                                            Delete</button>
+                                    </form>
+
+                                    <!-- Add Tracking Button -->
+                                    <a href="/add-tracking/<%= customer._id %>" class="btn btn-success"><i
+                                            class="fas fa-truck"></i> Add Tracking</a>
+                                </div>
+                                <% } %>
+            </div>
+
+            <!-- Contact Us Section -->
+            <div class="contact-section">
+                <div class="row text-center mt-4">
+                    <!-- Mail Us Section -->
+                    <div class="col-md-6 mb-3">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <h5><a href="mailto:svcourierservices.in@gmail.com" class="contact-link"
+                                    style="text-decoration: none;">Mail Us</a></h5>
+                        </div>
+                    </div>
+
+                    <!-- Call Us Section -->
+                    <div class="col-md-6 mb-3">
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt contact-icon"></i>
+                            <h5><a href="tel:+919014756771" class="contact-link" style="text-decoration: none;">Call
+                                    Us</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% } else { %>
+                <div class="alert alert-danger">
+                    <strong>Error:</strong> No customer found with that tracking ID.
+                </div>
+                <% } %>
+    </div>
+
+    <!-- Custom CSS with animations -->
+    <style>
+        .search-container {
+            font-family: 'Arial', sans-serif;
+            padding: 2rem;
+            padding-bottom: 3rem;
+            /* Ensure footer doesn't go too far down */
+        }
+
+        .search-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .search-description {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .details-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .customer-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .customer-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .customer-name {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .detail-item {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .detail-item p,
+        .detail-item h5 {
+            margin: 0.5rem 0;
+        }
+
+        .tracking-section {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #f4f6f7;
+            border-radius: 8px;
+        }
+
+        .progress-bar-container {
+            position: relative;
+            background-color: #e0e0e0;
+            height: 20px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 100%;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #27ae60;
+            transition: width 0.5s ease;
+        }
+
+        .tracking-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+
+        .tracking-item {
+            font-size: 1.1rem;
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .tracking-item i {
+            margin-right: 10px;
+        }
+
+        /* Animation for tracking updates */
+        .tracking-item {
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delivery-status-section {
+            margin-top: 2rem;
+        }
+
+        .form-check-input {
+            margin-right: 10px;
+        }
+    </style>

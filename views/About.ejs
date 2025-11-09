@@ -1,0 +1,92 @@
+<% layout("/layouts/boilerplate.ejs") -%>
+
+<!-- About Us Section -->
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh; padding: 20px;">
+    <div class="card text-center shadow-lg" style="width: 25rem; border-radius: 15px;">
+        <div class="card-header text-center bg-primary text-white">
+            <h3>About Us</h3>
+        </div>
+        <div class="card-body">
+            <p class="card-text text-muted">
+                Our courier service has been proudly serving customers offline for the past 10 years.
+                Over the years, we have built a reputation for reliability, speed, and commitment to excellence.
+                After successfully completing over 1000 services, we are now taking a step forward to go online and
+                expand our reach. This transition will allow us to connect with customers more effectively and
+                offer an even more seamless experience for all your delivery needs. We are excited to continue
+                delivering the same great service with enhanced accessibility and convenience for our customers.
+            </p>
+        </div>
+        <div class="card-footer text-center bg-light">
+            <small class="text-muted">Committed to Serving You for 10+ Years</small>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Section -->
+<div class="contact-section py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="text-center mb-4">Contact Us</h2>
+        <div class="row text-center">
+
+            <!-- Mail Us Section -->
+            <div class="col-md-6 mb-3">
+                <div class="contact-item">
+                    <i class="fas fa-envelope contact-icon" style="font-size: 40px; color: #007bff;"></i>
+                    <h5>
+                        <a href="mailto:svcourierservices.in@gmail.com" class="contact-link"
+                            style="text-decoration: none; color: #007bff; font-weight: bold;">Mail Us</a>
+                    </h5>
+                </div>
+            </div>
+
+            <!-- Call Us Section -->
+            <div class="col-md-6 mb-3">
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt contact-icon" style="font-size: 40px; color: #28a745;"></i>
+                    <h5>
+                        <a href="tel:+919014756771" class="contact-link"
+                            style="text-decoration: none; color: #28a745; font-weight: bold;">Call Us</a>
+                    </h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Additional Styling for Contact Section and Icons -->
+<style>
+    .card-header {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+    .card-body {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+    .card-footer {
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+    .contact-item {
+        padding: 15px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+    .contact-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    .contact-link {
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+    }
+    .contact-link:hover {
+        color: #0056b3;
+    }
+    .contact-icon {
+        margin-bottom: 10px;
+    }
+</style>

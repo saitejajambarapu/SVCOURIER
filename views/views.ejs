@@ -1,0 +1,123 @@
+<% layout("/layouts/boilerplate.ejs") -%>
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1>Edit Customer Details</h1>
+    </div>
+
+    <!-- Edit Form -->
+    <form action="/edit-customer/<%= customer._id %>" method="POST">
+        <!-- Customer Details -->
+        <div class="mb-3">
+            <label for="customername" class="form-label">Customer Name</label>
+            <input type="text" class="form-control" id="customername" name="customername" value="<%= customer.customername %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="phno" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="phno" name="phno" value="<%= customer.phno %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="<%= customer.email %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="aadharnumber" class="form-label">Aadhar Number</label>
+            <input type="text" class="form-control" id="aadharnumber" name="aadharnumber" value="<%= customer.aadharnumber %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="packageweight" class="form-label">Package Weight</label>
+            <input type="number" class="form-control" id="packageweight" name="packageweight" value="<%= customer.packageweight %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <textarea class="form-control" id="address" name="address" rows="3" required><%= customer.address %></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="state" class="form-label">State</label>
+            <input type="text" class="form-control" id="state" name="state" value="<%= customer.state %>"  required>
+        </div>
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" class="form-control" id="country" name="country" value="<%= customer.country %>"  required>
+        </div>
+        <div class="mb-3">
+            <label for="pricePerKg" class="form-label">Price Per Kg</label>
+            <input type="number" class="form-control" id="pricePerKg" name="pricePerKg" value="<%= customer.pricePerKg %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="totalPrice" class="form-label">Total Price</label>
+            <input type="number" class="form-control" id="totalPrice" name="totalPrice" value="<%= customer.totalPrice %>" required readonly>
+        </div>
+
+        <!-- Tracking Locations -->
+        <div class="mb-3">
+            <label for="packageTrackingLocations" class="form-label">Tracking Locations</label>
+            <input type="text" class="form-control" id="packageTrackingLocations" name="packageTrackingLocations"
+                value="<%= customer.packageTrackingLocations.join(', ') %>" placeholder="Enter locations separated by commas">
+            <small class="text-muted">Separate locations with commas.</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="updateTrackingLocations" class="form-label">Existing Tracking Locations:</label>
+            <% if (customer.packageTrackingLocations.length > 0) { %>
+                <ul>
+                    <% customer.packageTrackingLocations.forEach((location) => { %>
+                        <li><%= location %></li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <p>No tracking locations available.</p>
+            <% } %>
+        </div>
+
+        <!-- Date Fields (Delivery Date and Expected Delivery Date) -->
+        <div class="mb-3">
+            <label for="date" class="form-label">Delivery Date</label>
+            <input type="date" class="form-control" id="date" name="date" value="<%= new Date(customer.date).toISOString().split('T')[0] %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="expectedDeliveryDate" class="form-label">Expected Delivery Date</label>
+            <input type="date" class="form-control" id="expectedDeliveryDate" name="expectedDeliveryDate"
+                value="<%= new Date(customer.expectedDeliveryDate).toISOString().split('T')[0] %>" required>
+        </div>
+
+        <!-- ICLID and Tracking ID -->
+        <div class="mb-3">
+            <label for="iclid" class="form-label">ICL ID</label>
+            <input type="text" class="form-control" id="iclid" name="iclid" value="<%= customer.iclid %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="trackingId" class="form-label">Tracking ID</label>
+            <input type="text" class="form-control" id="trackingId" name="trackingId" value="<%= customer.trackingId %>" required>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Update Customer</button>
+    </form>
+</div>
+
+<script>
+    // JavaScript to automatically calculate total price when weight or price per kg changes
+    document.getElementById('packageweight').addEventListener('input', calculateTotalPrice);
+    document.getElementById('pricePerKg').addEventListener('input', calculateTotalPrice);
+
+    function calculateTotalPrice() {
+        const packageWeight = parseFloat(document.getElementById('packageweight').value) || 0;
+        const pricePerKg = parseFloat(document.getElementById('pricePerKg').value) || 0;
+
+        // Calculate the total price
+        const totalPrice = packageWeight * pricePerKg;
+
+        // Display the total price in the form field
+        document.getElementById('totalPrice').value = totalPrice.toFixed(2);
+    }
+</script>
+</body>
+</html>

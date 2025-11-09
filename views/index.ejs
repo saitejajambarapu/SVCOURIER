@@ -1,0 +1,146 @@
+<style>
+ /* General Styles */
+#offerings {
+  font-family: 'Kanit', sans-serif;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+#off {
+  font-size: 5vw;
+  color: rgb(75, 0, 130);
+  font-weight: bold;
+  text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  letter-spacing: 5px;
+}
+
+
+.background-container {
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('your-image-path.jpg'); /* Set your background image here */
+  background-size: cover;
+  background-position: center;
+}
+
+#count {
+  color: orange;
+}
+
+/* Scrollable Container for Countries */
+.country-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  padding: 20px;
+  gap: 20px;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  margin-top: 30px;
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  width: 100%; /* Ensure the container fits within the viewport */
+}
+
+/* Country Card Styling */
+.country-card {
+  flex-shrink: 0;
+  width: 200px;
+  height: 150px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.country-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.country-card h3 {
+  position: absolute;
+  font-size: 18px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Optional: Hover effect on the cards */
+.country-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* Hide Scrollbar */
+.country-scroll-container::-webkit-scrollbar {
+  display: none;  /* Hide scrollbar on webkit-based browsers (Chrome, Safari) */
+}
+
+.country-scroll-container {
+  -ms-overflow-style: none;  /* Hide scrollbar on IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar on Firefox */
+}
+
+/* Optional: Make the card container responsive */
+@media (max-width: 500px) {
+  .country-card {
+    width: 150px;
+    height: 120px;
+  }
+
+  .background-container {
+  height: 60vh; /* Adjust the height as needed */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../public/images/mainlogo.png"); /* Replace with your image URL */
+  background-size: cover; /* Makes sure the image covers the entire container */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents repeating the image */
+  /* Optional: ensures the text is visible over the background */
+}
+
+
+
+
+}
+
+</style>
+
+<% layout("/layouts/boilerplate.ejs") -%>
+
+<div class="background-container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1 id="off">MORE THAN <span id="count">0</span> OFFLINE DELIVERIES</h1>
+    </div>
+  </div>
+</div>
+
+<!-- Our Offerings Section -->
+<div class="container-fluid text-center" style="margin-top: 50px;">
+  <div class="row">
+    <div class="col">
+      <h1 id="offerings">OUR OFFERINGS</h1>
+    </div>
+  </div>
+</div>
+
+<%- include("./includes/offerings.ejs") %>
+
+<%- include("./includes/scrollablecards.ejs") %>
+
+<%- include("./includes/comments.ejs") %>

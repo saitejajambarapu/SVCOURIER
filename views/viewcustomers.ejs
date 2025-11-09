@@ -1,0 +1,262 @@
+<% layout("/layouts/boilerplate.ejs") -%>
+
+    <div class="container mt-5">
+        <!-- Center the "All Customers" header -->
+        <div class="text-center mb-5">
+            <h1>All Customers</h1>
+        </div>
+
+        <!-- Active Customers Section -->
+        <div class="mb-5">
+            <h3>Active Customers</h3>
+            <div class="row justify-content-center">
+                <% customers.filter(customer=> new Date(customer.expectedDeliveryDate) >= new
+                    Date(today)).forEach(customer => { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm customer-card">
+                            <!-- Customer Image -->
+                            <img src="/images/mainlogo.png" class="card-img-top" alt="Customer Image">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-center mb-3">
+                                    <%= customer.customername %>
+                                </h5>
+                                <!-- Tracking ID and ICL ID -->
+                                <p class="card-text"><strong>Tracking ID:</strong>
+                                    <%= customer.trackingId %>
+                                </p>
+                                <p class="card-text"><strong>ICL ID:</strong>
+                                    <%= customer.iclid %>
+                                </p>
+                                <!-- Customer Details -->
+                                <p class="card-text"><strong>Phone:</strong>
+                                    <%= customer.phno %>
+                                </p>
+                                <p class="card-text"><strong>Email:</strong>
+                                    <%= customer.email %>
+                                </p>
+                                <p class="card-text"><strong>Aadhar Number:</strong>
+                                    <%= customer.aadharnumber %>
+                                </p>
+                                <p class="card-text"><strong>Package Weight:</strong>
+                                    <%= customer.packageweight %> kg
+                                </p>
+                                <p class="card-text"><strong>Address:</strong>
+                                    <%= customer.address %>
+                                </p>
+                                <p class="card-text"><strong>State:</strong>
+                                    <%= customer.state %>
+                                </p>
+                                <p class="card-text"><strong>Country:</strong>
+                                    <%= customer.country %>
+                                </p>
+                                <p class="card-text"><strong>Price per Kg:</strong> ₹<%= customer.pricePerKg %>
+                                </p>
+                                <p class="card-text"><strong>Total Price:</strong> ₹<%= customer.totalPrice %>
+                                </p>
+
+                                <p class="card-text">
+                                    <strong>Received Date:</strong>
+                                    <%= new Date(customer.date).toLocaleDateString('en-IN', { weekday: 'long' ,
+                                        year: 'numeric' , month: 'long' , day: 'numeric' }) %>
+                                </p>
+                                <!-- Expected Delivery Date with Day -->
+                                <p class="card-text">
+                                    <strong>Expected Delivery Date:</strong>
+                                    <%= new Date(customer.expectedDeliveryDate).toLocaleDateString('en-IN', {
+                                        weekday: 'long' , year: 'numeric' , month: 'long' , day: 'numeric' }) %>
+                                </p>
+
+                                <!-- Package Tracking Locations -->
+                                <% if (customer.packageTrackingLocations.length> 0) { %>
+                                    <p class="card-text"><strong>Tracking Locations:</strong></p>
+                                    <ul>
+                                        <% customer.packageTrackingLocations.forEach(location=> { %>
+                                            <li>
+                                                <%= location %>
+                                            </li>
+                                            <% }) %>
+                                    </ul>
+                                    <% } else { %>
+                                        <p class="card-text"><strong>Tracking Locations:</strong> Not available</p>
+                                        <% } %>
+
+                                            <!-- Optional Buttons Section -->
+                                            <% if (isloggedin) { %>
+                                                <div class="delivery-status-section mt-4">
+                                                    <form action="/update-delivery-status/<%= customer._id %>"
+                                                        method="POST">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="deliveryStatus" name="deliveredStatus"
+                                                                <%=customer.deliveredStatus ? 'checked' : '' %>
+                                                            />
+                                                            <label class="form-check-label" for="deliveryStatus">
+                                                                Mark as Delivered
+                                                            </label>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary mt-3">Save Delivery
+                                                            Status</button>
+                                                    </form>
+                                                </div>
+                                                <div class="d-flex justify-content-between mt-auto">
+                                                    <a href="/edit-customer/<%= customer._id %>"
+                                                        class="btn btn-warning btn-sm">Edit</a>
+                                                    <form action="/delete-customer/<%= customer._id %>?_method=DELETE"
+                                                        method="POST" class="d-inline">
+                                                        <button type="submit"
+                                                            class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+                                                    <a href="/add-tracking/<%= customer._id %>"
+                                                        class="btn btn-success btn-sm">Add Tracking</a>
+                                                </div>
+                                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+
+        <!-- Completed Customers Section -->
+        <div class="mb-5">
+            <h3>Completed Customers</h3>
+            <div class="row justify-content-center">
+                <% customers.filter(customer=> new Date(customer.expectedDeliveryDate) < new
+                        Date(today)).forEach(customer=> { %>
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm customer-card completed">
+                                <!-- Customer Image -->
+                                <img src="/images/mainlogo.png" class="card-img-top" alt="Customer Image">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title text-center mb-3">
+                                        <%= customer.customername %>
+                                    </h5>
+                                    <!-- Tracking ID and ICL ID -->
+                                    <p class="card-text"><strong>Tracking ID:</strong>
+                                        <%= customer.trackingId %>
+                                    </p>
+                                    <p class="card-text"><strong>ICL ID:</strong>
+                                        <%= customer.iclid %>
+                                    </p>
+                                    <!-- Customer Details -->
+                                    <p class="card-text"><strong>Phone:</strong>
+                                        <%= customer.phno %>
+                                    </p>
+                                    <p class="card-text"><strong>Email:</strong>
+                                        <%= customer.email %>
+                                    </p>
+                                    <p class="card-text"><strong>Aadhar Number:</strong>
+                                        <%= customer.aadharnumber %>
+                                    </p>
+                                    <p class="card-text"><strong>Package Weight:</strong>
+                                        <%= customer.packageweight %> kg
+                                    </p>
+                                    <p class="card-text"><strong>Address:</strong>
+                                        <%= customer.address %>
+                                    </p>
+                                    <p class="card-text"><strong>Country:</strong>
+                                        <%= customer.country %>
+                                    </p>
+                                    <p class="card-text"><strong>Price per Kg:</strong> ₹<%= customer.pricePerKg %>
+                                    </p>
+                                    <p class="card-text"><strong>Total Price:</strong> ₹<%= customer.totalPrice %>
+                                    </p>
+
+                                    <p class="card-text">
+                                        <strong>Received Date:</strong>
+                                        <%= new Date(customer.date).toLocaleDateString('en-IN', { weekday: 'long' ,
+                                            year: 'numeric' , month: 'long' , day: 'numeric' }) %>
+                                    </p>
+
+                                    <!-- Expected Delivery Date with Day -->
+                                    <p class="card-text">
+                                        <strong>Expected Delivery Date:</strong>
+                                        <%= new Date(customer.expectedDeliveryDate).toLocaleDateString('en-IN', {
+                                            weekday: 'long' , year: 'numeric' , month: 'long' , day: 'numeric' }) %>
+                                    </p>
+
+                                    <!-- Package Tracking Locations -->
+                                    <% if (customer.packageTrackingLocations.length> 0) { %>
+                                        <p class="card-text"><strong>Tracking Locations:</strong></p>
+                                        <ul>
+                                            <% customer.packageTrackingLocations.forEach(location=> { %>
+                                                <li>
+                                                    <%= location %>
+                                                </li>
+                                                <% }) %>
+                                        </ul>
+                                        <% } else { %>
+                                            <p class="card-text"><strong>Tracking Locations:</strong> Not available</p>
+                                            <% } %>
+
+                                                <!-- Optional Buttons Section -->
+                                                <% if (isloggedin) { %>
+                                                    <div class="d-flex justify-content-between mt-auto">
+                                                        <a href="/edit-customer/<%= customer._id %>"
+                                                            class="btn btn-warning btn-sm">Edit</a>
+                                                        <form
+                                                            action="/delete-customer/<%= customer._id %>?_method=DELETE"
+                                                            method="POST" class="d-inline">
+                                                            <button type="submit"
+                                                                class="btn btn-danger btn-sm">Delete</button>
+                                                        </form>
+                                                        <a href="/add-tracking/<%= customer._id %>"
+                                                            class="btn btn-success btn-sm">Add Tracking</a>
+                                                    </div>
+                                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom CSS -->
+    <style>
+        .customer-card {
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .customer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .customer-card .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .completed {
+            opacity: 0.7;
+        }
+
+        .btn-sm {
+            font-size: 0.8rem;
+        }
+
+        .card-text {
+            margin-bottom: 0.75rem;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding-left: 1rem;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        .d-flex {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>

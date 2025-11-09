@@ -1,0 +1,21 @@
+#off{
+    font-family: 'Kanit', sans-serif;
+    font-size: xx-large;
+    font-weight: bold;
+}
+.acs{
+    width: 80%;
+    height: 100%;
+    border-radius: 10px;
+}
+.pick-up{
+    width: 80%;
+    height: 65%;
+    border-radius: 10px;
+}
+h2{
+    font-family: 'Kanit', sans-serif;
+    font: weight 100px;
+    font-size:large;
+    color: gray;
+}

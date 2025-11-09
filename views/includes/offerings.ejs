@@ -1,0 +1,187 @@
+<style>
+    /* Add the animation to move elements from bottom to top */
+    @keyframes slideUp {
+        0% {
+            opacity: 0;
+            transform: translateY(50px); /* Start 50px below */
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0); /* Move to original position */
+        }
+    }
+
+    /* Class that triggers the animation */
+    .animate-up {
+        opacity: 0;
+        animation: slideUp 1s ease-out forwards;
+    }
+
+    /* Optional: Make sure the images do not overflow and remain in their container */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Styling for the text and sections */
+    .maindiv {
+        margin-top: 150px;
+    }
+
+    h2 {
+        font-family: 'Kanit', sans-serif;
+        font-weight: 100;
+        font-size: xx-large;
+        color: gray;
+    }
+
+    p {
+        font-size: 16px;
+        color: #333;
+    }
+
+    /* Styling to make sure text is on the left and images on the right */
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap; /* This allows elements to stack on small screens */
+    }
+
+    .row .col-md-6 {
+        flex: 1;
+        padding: 10px;
+    }
+
+    .col-md-6 img {
+        width: 80%;
+        height: 90%;
+        border-radius: 10px;
+    }
+
+    /* Optional: Adjust margins and paddings if needed */
+    .col-md-6 h2,
+    .col-md-6 p {
+        text-align: left;
+    }
+
+    /* Mobile view: Stack the elements vertically (text first, then image) */
+    @media (max-width: 768px) {
+        .row {
+            flex-direction: column; /* Stack the text on top of the image */
+        }
+
+        .col-md-6 img {
+            margin-top: 20px; /* Add some space between text and image */
+            width: 100%; /* Ensure images fill the width of the container on mobile */
+            height: auto;
+        }
+
+        .col-md-6 h2,
+        .col-md-6 p {
+            text-align: center; /* Center text on mobile */
+        }
+    }
+</style>
+</head>
+
+<body>
+<!-- AT SV COURIER SERVICES Section -->
+<div class="container-fluid text-center animate-up-element" style="margin-top: 50px;">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>AT SV COURIER SERVICES</h2>
+            <p>At SV COURIER SERVICES, we redefine the standard of courier services with our unparalleled commitment to
+                pick-up and secure, reliable delivery. With a focus on efficiency, security, and customer satisfaction, we
+                have created a courier experience that exceeds expectations and leaves our clients confident in the seamless
+                transportation of their valuable items.</p>
+        </div>
+        <div class="col-md-6">
+            <img class="acs" src="/images/slider1.jpg" alt="at courier services">
+        </div>
+    </div>
+</div>
+
+<!-- PICK-UP Section -->
+<div class="container-fluid text-center animate-up-element maindiv">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>PICK-UP</h2>
+            <p>Time is of the essence, and we understand that your shipments need to move quickly. Our dedicated team of
+                couriers is strategically positioned to ensure rapid pick-up within moments of your request. Whether it's a
+                time-sensitive document, a fragile package, or a high-priority shipment, our fleet is ready to spring into
+                action, saving you precious minutes and allowing you to maintain your operations with minimal interruption.</p>
+        </div>
+        <div class="col-md-6">
+            <img class="pick-up" src="/images/49670218_s.jpg" alt="pick up">
+        </div>
+    </div>
+</div>
+
+<!-- SECURE DELIVERY Section -->
+<div class="container-fluid text-center animate-up-element maindiv">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>SECURE DELIVERY</h2>
+            <p>Your peace of mind is our top priority. SwiftShip Courier employs an array of state-of-the-art security measures
+                to ensure that your packages arrive at their destination in the same condition they left. Our secure handling
+                processes, tamper-evident packaging, real-time tracking, and rigorous chain of custody protocols guarantee
+                that your items are protected from the moment they leave your hands until they're safely received by the
+                intended recipient. Our commitment to security extends to all types of shipments, from sensitive documents to
+                valuable merchandise.</p>
+        </div>
+        <div class="col-md-6">
+            <img style="width: 80%; height: 90%; border-radius: 10px;" src="/images/give a banner design.jpg" alt="secure delivery">
+        </div>
+    </div>
+</div>
+
+<!-- CUTTING-EDGE TECHNOLOGY Section -->
+<div class="container-fluid text-center animate-up-element maindiv">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>CUTTING-EDGE TECHNOLOGY</h2>
+            <p>We harness the latest advancements in technology to enhance the entire courier experience. Our user-friendly
+                online platform allows you to easily schedule pick-ups, track shipments in real-time, and receive instant
+                notifications upon delivery. We leverage secure communication channels to ensure transparency, accuracy, and
+                efficient communication throughout the delivery process.</p>
+        </div>
+        <div class="col-md-6">
+            <img style="width: 80%; height: 90%; border-radius: 10px;" src="/images/banner6.jpg" alt="cutting-edge technology">
+        </div>
+    </div>
+</div>
+
+<!-- GLOBAL REACH, LOCAL TOUCH Section -->
+<div class="container-fluid text-center animate-up-element maindiv">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>GLOBAL REACH, LOCAL TOUCH</h2>
+            <p>Whether you're sending a package across town or to the other side of the world, SwiftShip Courier has you
+                covered. Our extensive network of couriers spans across cities, countries, and continents, allowing us to
+                seamlessly facilitate both domestic and international deliveries. No matter where your package needs to go,
+                our local expertise ensures that it arrives on time and intact.</p>
+            <p>Experience the SwiftShip difference and enjoy unparalleled fast pick-up and secure delivery services that set
+                us apart from the rest. Discover a new level of convenience, reliability, and peace of mind with SwiftShip
+                Courier – where your packages are not just shipments, but a testament to our commitment to excellence.</p>
+        </div>
+        <div class="col-md-6">
+            <img style="width: 80%; height: 90%; border-radius: 10px;" src="/images/T316920266_g.jpg" alt="global reach">
+        </div>
+    </div>
+</div>
+
+<!-- DEDICATED CUSTOMER SUPPORT Section -->
+<div class="container-fluid text-center animate-up-element maindiv">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>DEDICATED CUSTOMER SUPPORT</h2>
+            <p>At SV COURIER SERVICES, we pride ourselves on offering exceptional customer service. Our experienced and
+                friendly customer support team is available around the clock to address any inquiries, provide updates, and
+                resolve any issues that may arise. We understand that every shipment is unique, and we are committed to
+                tailoring our services to meet your specific needs.</p>
+            <img style="width: 60%; height: 70%; border-radius: 10px;" src="/images/banner6.jpg" alt="customer support">
+        </div>
+    </div>
+</div>

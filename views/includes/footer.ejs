@@ -1,0 +1,72 @@
+<style>
+    /* Ensure the footer is at the bottom of the page */
+    html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Content wrapper that fills available space */
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 auto; /* This ensures the content section grows to fill the available space */
+    }
+    
+    /* Custom footer styling */
+    .custom-footer {
+        margin-top: 0;
+        padding-top: 1rem;  /* Adjust padding as needed */
+        background-color: #343a40; /* Example dark background */
+        color: white;
+        text-align: center;
+    }
+    
+    /* Custom container inside the footer */
+    .custom-footer-container {
+        width: 100%;
+        padding: 0 15px; /* Padding for small margins */
+    }
+    
+    /* Custom row inside the footer */
+    .custom-footer-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    /* Custom column inside the footer */
+    .custom-footer-column {
+        text-align: center;
+    }
+    
+    /* Custom heading for the footer */
+    .custom-footer h2 {
+        font-size: 2rem;
+        color: #f8f9fa;
+    }
+    
+    /* Custom paragraph in the footer */
+    .custom-footer p {
+        font-size: 1.1rem;
+        color: #ddd;
+        line-height: 1.5;
+    }
+    </style>
+    
+    <div class="content-wrapper">
+        <!-- Main content goes here -->
+    
+        <footer class="custom-footer">
+            <div class="custom-footer-container">
+                <div class="custom-footer-row">
+                    <div class="custom-footer-column">
+                        <h2>About Us</h2>
+                        <p>We are a trusted courier service that has been operating offline for many years, delivering over 1000+ successful deliveries to date. Our service is built on reliability, speed, and customer satisfaction. Now, we are bringing our services online, making it easier for you to schedule pick-ups and track your deliveries with just a few clicks. Whether it's an urgent document, fragile package, or large shipment, we are here to ensure safe and timely delivery every time. Join us as we continue to expand and offer seamless courier solutions at your fingertips.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    

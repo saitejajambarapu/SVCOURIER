@@ -1,0 +1,140 @@
+<style>
+    /* Custom navbar styling */
+    .custom-navbar {
+        background-color: rgb(75, 0, 130);
+        /* Purple background */
+        color: white;
+        /* White text */
+    }
+
+    .navbar-nav {
+        align-items: center;
+        /* Vertically center the items */
+    }
+
+    .navbar-brand {
+        font-size: 1.8rem;
+        color: white !important;
+    }
+
+    /* Adjust navbar-toggler icon */
+    .navbar-toggler-icon {
+        width: 30px;
+        height: 25px;
+        position: relative;
+    }
+
+    .navbar-toggler-icon::before,
+    .navbar-toggler-icon::after,
+    .navbar-toggler-icon span {
+        content: '';
+        position: absolute;
+        height: 4px;
+        width: 100%;
+        background-color: white;
+        border-radius: 5px;
+        transition: 0.3s ease;
+    }
+
+    .navbar-toggler-icon::before {
+        top: 0;
+    }
+
+    .nav-link:hover {
+        color: rgba(255, 255, 255, 0.8);
+        /* Lighten the white slightly */
+    }
+
+    .navbar-toggler-icon span {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .navbar-toggler-icon::after {
+        bottom: 0;
+    }
+
+    /* Fix image visibility */
+    .image-nav {
+        width: 80px;
+        height: 50px;
+    }
+
+    /* Optional: Center the page content */
+    .main-content {
+        padding: 60px 0;
+        text-align: center;
+    }
+
+    /* Optional: Navbar Links */
+    .nav-link {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: white;
+    }
+</style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm bg-body-light border-bottom sticky-top custom-navbar">
+        <div class="container-fluid">
+            <!-- Logo on the extreme left -->
+            <a class="navbar-brand" href="/Home">
+                <img src="/images/mainlogoheader.png" alt="Logo" class="img-fluid image-nav">
+            </a>
+
+            <!-- Navbar toggle for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Title "Couriers" in the center -->
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <span class="nav-link">SV Couriers</span>
+                    </li>
+                </ul>
+
+                <!-- Prices and About sections to the right -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Prices">Prices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/About">About</a>
+                    </li>
+                    <%if(!isloggedin){%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Login">Login</a>
+                        </li>
+                        <%}%>
+                            <%if(isloggedin){%>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Logout">LogOut</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/myprofile">My Profile</a>
+                                </li>
+                                <%}%>
+                </ul>
+
+                <!-- Search button -->
+                <form class="d-flex ms-3" action="/search" method="get">
+                    <!-- Search input field with name 'trackingId' to match query parameter -->
+                    <input class="form-control me-2" type="search" name="trackingId" placeholder="Enter Tracking ID"
+                        aria-label="Search" required>
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="fas fa-search"></i> <!-- Search icon -->
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </nav>

@@ -1,0 +1,235 @@
+<% layout("/layouts/boilerplate.ejs") -%>
+
+<!-- Main Container -->
+<div class="container mt-5">
+    <!-- Total Orders and Income Section -->
+    <d<div class="row">
+        <div class="col-lg-6 col-md-12 mb-4">
+            <div class="total-orders-card">
+                <div class="card-body">
+                    <h3 class="card-title">Total Orders</h3>
+                    <h2 class="card-value"><%= totalOrders %></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 mb-4">
+            <div class="total-income-card">
+                <div class="card-body">
+                    <h3 class="card-title">Total Income</h3>
+                    <h2 class="card-value">₹<%= totalIncome %></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-6 col-md-12 mb-4">
+            <div class="todays-orders-card">
+                <div class="card-body">
+                    <h3 class="card-title">Today's Orders</h3>
+                    <h2 class="card-value"><%= todaysOrders %></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 mb-4">
+            <div class="todays-income-card">
+                <div class="card-body">
+                    <h3 class="card-title">Today's Income</h3>
+                    <h2 class="card-value">₹<%= todaysIncome %></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Action Buttons Section -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-3 mb-4">
+            <a href="/addNewCustomerDetails" class="action-btn add-customer-btn">Add New Customer</a>
+        </div>
+        <div class="col-md-3 mb-4">
+            <a href="/addNewCountry" class="action-btn add-country-btn">Add New Country</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-3 mb-4">
+            <a href="/viewAllCustomerDetails" class="action-btn view-customers-btn">View Customers</a>
+        </div>
+        <div class="col-md-3 mb-4">
+            <a href="/Prices" class="action-btn view-countries-btn">View Countries</a>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    /* Global Styling */
+    a{
+        text-decoration: none;
+    }
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+        max-width: 1200px;
+    }
+
+    .card-body h3 {
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+
+    .card-body h2 {
+        font-size: 2.8rem;
+        font-weight: 700;
+    }
+
+    /* Card Styling */
+    .card-body {
+        padding: 2rem;
+    }
+
+    /* Total Orders Card */
+    .total-orders-card {
+        background-color: #ffffff;
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .total-orders-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .total-orders-card .card-value {
+        color: #1f77b4; /* Blue for total orders */
+    }
+
+    /* Total Income Card */
+    .total-income-card {
+        background-color: #ffffff;
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .total-income-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .total-income-card .card-value {
+        color: #28a745; /* Green for income */
+    }
+
+    /* Today's Orders Card */
+    .todays-orders-card {
+        background-color: #ffffff;
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .todays-orders-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .todays-orders-card .card-value {
+        color: #ffc107; /* Yellow for today's orders */
+    }
+
+    /* Today's Income Card */
+    .todays-income-card {
+        background-color: #ffffff;
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .todays-income-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .todays-income-card .card-value {
+        color: #ffc107; /* Yellow for today's income */
+    }
+
+    /* Button Styling */
+    .action-btn {
+        font-size: 1.2rem;
+        font-weight: 600;
+        border-radius: 50px;
+        padding: 12px;
+        text-align: center;
+        transition: all 0.3s ease;
+        display: block;
+        width: 100%;
+    }
+
+    .add-customer-btn {
+        background: linear-gradient(45deg, #ff7e5f, #feb47b);
+        color: white;
+    }
+
+    .add-country-btn {
+        background: linear-gradient(45deg, #6a11cb, #2575fc);
+        color: white;
+    }
+
+    .view-customers-btn {
+        background-color: white;
+        color: #007bff;
+        border: 2px solid #007bff;
+    }
+
+    .view-countries-btn {
+        background-color: white;
+        color: #28a745;
+        border: 2px solid #28a745;
+    }
+
+    /* Hover effects for buttons */
+    .action-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .add-customer-btn:hover {
+        background: linear-gradient(45deg, #feb47b, #ff7e5f);
+    }
+
+    .add-country-btn:hover {
+        background: linear-gradient(45deg, #2575fc, #6a11cb);
+    }
+
+    .view-customers-btn:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .view-countries-btn:hover {
+        background-color: #28a745;
+        color: white;
+    }
+
+    /* Section Styling */
+    .row {
+        margin-bottom: 30px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .action-btn {
+            font-size: 1rem;
+        }
+
+        .card-body h2 {
+            font-size: 2rem;
+        }
+    }
+</style>

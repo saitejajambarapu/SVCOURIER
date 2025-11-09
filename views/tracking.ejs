@@ -1,0 +1,35 @@
+<% layout("/layouts/boilerplate.ejs") -%>
+<div class="container mt-5">
+    <h1>Customer Details</h1>
+    <div class="row">
+        <div class="col">
+            <h2>Customer Name: <%= customer.customername %></h2>
+            <p><strong>Phone Number:</strong> <%= customer.phno %></p>
+            <p><strong>Email:</strong> <%= customer.email %></p>
+            <p><strong>Aadhar Number:</strong> <%= customer.aadharnumber %></p>
+            <p><strong>Package Weight:</strong> <%= customer.packageweight %> kg</p>
+            <p><strong>Date:</strong> <%= customer.date.toDateString() %></p>
+        </div>
+        <div class="col" style="margin-bottom: 150px;">
+            <h3>Tracking Locations:</h3>
+            <ul>
+                <% customer.packageTrackingLocations.forEach(function(location, index) { %>
+                    <li><%= location %></li>
+                <% }) %>
+            </ul>
+
+            <!-- Form to update location and delivery status -->
+            <h4>Update Tracking Location</h4>
+            <form action="/add-tracking/<%= customer._id %>/" method="POST">
+                <div class="mb-3">
+                    <label for="location" class="form-label">New Location</label>
+                    <input type="text" class="form-control" id="location" name="location" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Location</button>
+            </form>
+
+            <!-- Delivery Status Checkbox -->
+           
+        </div>
+    </div>
+</div>
